@@ -34,6 +34,8 @@ def k_means(k, X):
     #   array([1, 2, 3])
     # errors = ...
 
+    errors = np.append(errors, e)
+
     # цикл до тех пор, пока центры не стабилизируются
     iteration_count = 1
     while not np.all(curr_iteration == prev_iteration):
@@ -52,11 +54,15 @@ def k_means(k, X):
         # присоединить подматрицу к матрице можно с помощью уже знакомой функции append из библиотеки numpy
         # all_centers = ...
 
+        all_centers = np.append(all_centers, centers)
+
         # приписываем каждую точку к заданному классу
         curr_iteration, e = class_of_each_point(X, centers)
 
         # TODO: внести ошибку e для текущей итерации в вектор errors
         # errors = ...
+
+        errors = np.append(errors, e)
 
         iteration_count += 1
 
@@ -75,16 +81,18 @@ def k_means(k, X):
     # >>> b
     # array([[[1, 2],
     #         [3, 4]],
-    # 
+    #
     #        [[5, 6],
     #         [7, 8]]])
     # >>> b.shape
     # (2, 2, 2)
     # all_centers = np.reshape(...)
 
+    all_centers = np.reshape(all_centers, [iteration_count, k, n])
+
     # TODO: модифицировать оператор return так, чтобы
     # функция возвращала переменные centers, all_centers и errors
-    return 0
+    return centers, all_centers, errors
 
 
 # вычисление расстояния между двумя точками
@@ -119,5 +127,7 @@ def class_of_each_point(X, centers):
     # Для возведения в квадрат используйте функцию pow(a, 2),
     # а для вычисления среднего numpy.mean(a), где a - это numpy.array
     # err = ...
+
+    err = np.mean(pow(min_dist, 2))
 
     return classes, err
