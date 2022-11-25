@@ -53,18 +53,18 @@ centers, all_centers, errors = k_means(k, X)
 
 # отображаем график ошибки для каждой промежуточной итерации
 plt.plot(np.arange(1, len(errors) + 1), errors, 'bo-')
-plt.title('Error by iteration')
-plt.xlabel('iteration number')
-plt.ylabel('error level')
+plt.title('Ошибка при повторении')
+plt.xlabel('номер итерации')
+plt.ylabel('уровень ошибки')
 plt.grid()
 plt.show()
 
 
 # # отображаем траекторию движения каждого центроида
 plt.plot(X[:, 0], X[:, 1], 'bo')
-plt.title('Centroid trajectories')
-plt.xlabel('standardized height')
-plt.ylabel('standardized weight')
+plt.title('Центральная траектория')
+plt.xlabel('стандартизированная высота')
+plt.ylabel('стандартизированная ширина')
 plt.grid()
 
 plt.plot(centers[:, 0], centers[:, 1], 'g*')
@@ -89,8 +89,8 @@ for k in range(min_k, max_k + 1):
     error_by_k = np.append(error_by_k, np.min(min_err))
 
 plt.plot(np.arange(min_k, max_k + 1), error_by_k, 'bo-')
-plt.title('Error by k')
-plt.xlabel('k (number of clusters)')
-plt.ylabel('error level')
+plt.title('Зависимость ошибки от числа кластеров')
+plt.xlabel('k (количество кластеров)')
+plt.ylabel('уровень ошибки')
 plt.grid()
 plt.show()
