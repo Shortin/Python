@@ -81,21 +81,26 @@ author1='Кот Матроскин'
 author2='Галчонок'
 film_rating1=[]
 film_rating2=[]
+nameFilm = []
 for item in critics[author1]:
     if item in critics[author2]:
         film_rating1.append(critics[author1][item])
         film_rating2.append(critics[author2][item])
+        nameFilm.append(item)
 
 plt.xlabel(f'{author1}')
 plt.ylabel(f'{author2}')
 plt.grid()
-plt.xlim(0,5)
-plt.ylim(0,5)
+plt.xlim(2.3,4.1)
+plt.ylim(2.8,5.2)
 print(min(film_rating1))
 slope, intercept, r, *__ = scipy.stats.linregress(film_rating1, film_rating2)
 plt.plot(film_rating1,film_rating2, 'b.')
 fx = np.array([min(film_rating1), max(film_rating1)])
 plt.plot(fx,(intercept + slope * fx), 'r')
+for f1,f2,f in zip(film_rating1,film_rating2,nameFilm):
+    plt.text(f1,f2,f,horizontalalignment='left',
+        verticalalignment='top')
 
 plt.show()
 
@@ -109,4 +114,3 @@ def top_matches(prefs,person):
     return scores[0:len(critics)]
 
 print(top_matches(critics,'Кот Матроскин'))
-
